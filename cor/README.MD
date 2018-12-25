@@ -2,4 +2,4 @@
 
 Dá uma cor para o membro que executou o comando
 <hr>
-Como usar: +cor <cor>
+Como usar: +cor (nome da cor)
