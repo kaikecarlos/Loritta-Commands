@@ -1,2 +1,4 @@
-# Loritta-Commands
-Compilado de comandos custom da Loritta
+<p align="center">
+  <h1 align="center">Loritta-Commands</h1>
+  <hr></hr>
+</p>
