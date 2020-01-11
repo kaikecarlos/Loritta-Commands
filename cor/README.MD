@@ -1,5 +1,3 @@
-# COR.js
+# Comando de cor
 
-Dá uma cor para o membro que executou o comando
-<hr>
-Como usar: +cor (nome da cor)
+Dá ou remove uma cor para o membro que executou o comando
