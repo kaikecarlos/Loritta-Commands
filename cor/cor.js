@@ -1,63 +1,82 @@
-var colorToId = {
-    "amarelo": "300629752170151937",
-    "verde claro": "300629390746845184",
-    "verde escuro": "342038211075375124",
-    "vermelho claro": "300629673510174720",
-    "vermelho escuro": "342038003801260032",
-    "rosa": "300629867115053066",
-    "preto": "300630034408931329",
-    "cinza claro": "300630125987233802",
-    "cinza escuro": "342038682947026955",
-    "roxo": "300629820268609538",
-    "branco": "300629979857944576",
-    "laranja": "319586866208964608",
-    "azul claro": "299950708235698177",
-    "azul escuro": "342037881298092032",
-    "ouro": "342707528343224321",
-    "prata": "342707616390316033",
-    "bronze": "342707984981557260"
+// ---- [Configurações] ----
+var colorCommand = {
+    roleId: "" // Id da role que poderá usar o comando de cor, deixe em branco caso qualquer um possa usar
 };
 
-var coresComVariante = ["verde", "vermelho", "cinza", "azul"];
-var coresExclusivas = ["ouro", "prata", "bronze"];
+var colorCommandMessages =  {
+    missingPermission: "Sem permissão", // Mensagem que será enviada quando o usuário não tiver a role para usar o comando (deixar em branco caso não exista role específica para usar o comando)   
+    mentionUser: true, // Mencionar o usuário que executou o comando, deixe "false" para NÃO mencionar e "true" para mencionar
+    alreadyUsedIndicator: true, // Adiciona um 🔵 ou 🔴 na frente de todas as cores quando o usuário executa o comando com um "list" na frente. Serve para indicar se o usuário está ou não usando aquela cor.   
+    commandEmoji: "🎨", // Emoji que vem antes do comando ("😄 | ..."). O emoji precisa estar em unicode, ex: "commandEmoji: "😔".
+    cargoAdicionado: "Cor adicionada", // Mensagem enviada quando o cargo da cor é ADICIONADO ao usuário
+    cargoRemovido: "Cor removida" // Mensagem enviada quando o cargo da cor é REMOVIDO do usuário
+};
 
-if(getArgument(0) !== null) {
-var cor = joinArguments().toLowerCase();
+var cores = []; // Array das cores, não mexa nisso
 
-if(cor == "lista") {
-    reply("**Cores disponíveis: ** " + Object.keys(colorToId).join(", "));
-} else {
-if (cor in colorToId) {
-    var roleId = colorToId[cor];
-    if(coresExclusivas.indexOf(cor) > -1) {
-            var role = getGuild().getRoleById(roleId);
-    
-    if (author().hasRole(role)) {
-        author().removeRole(role);
-        reply("Você removeu a cor `" + cor + "`!");
-    } else {
-        author().addRole(role);
-        reply("Você recebeu a cor `" + cor + "`!");
-    }
-        } else {
-            reply("O cargo `" + cor + "` é exclusivo para MODERADORES.");
-        }
-    } else {
-    var role = getGuild().getRoleById(roleId);
-    
-    if (author().hasRole(role)) {
-        author().removeRole(role);
-        reply("Você removeu a cor `" + cor + "`!");
-    } else {
-        author().addRole(role);
-        reply("Você recebeu a cor `" + cor + "`!");
-    }
-}}} else {
-    if(coresComVariante.indexOf(cor) > -1) {
-        reply("`" + cor + "` contém variantes. Por favor, escolha apenas `" + cor + " escuro` ou `" + cor + " claro`.");
-    } else {
-    reply("Essa cor não existe.");
-}}}} else {
-    reply("Digite a cor desejada após `+cor`, ou adicione `lista` para ver a lista de cores: `+cor amarelo`, `+cor lista`\n\nSe você quiser remover uma cor, execute o comando como se você fosse COLOCÁ-LA, mas ela será retirada.\nSe for TROCAR uma cor, terá que remover a antiga antes.");
+function addColor(colorName, role) { // Função para adicionar as cores, também não mexa nisso
+    cores.push({
+        cor: colorName.toLowerCase(),
+        roleId: role
+    });
 }
-// Creditos à SMIX(Pelo Codigo), MrPowerGamerBR(Pela Loritta), Kaike Carlos(Por esse Repo)
+
+//Para adicionar uma cor, use: "addColor('NOMEDACOR', 'IDDOCARGO');" 
+//Ex: 
+//addColor('Vermelho', '123456789101112131');
+//addColor('Verde', '123456789101112131');
+//...
+
+/**
+ * NÃO ALTERE NADA ABAIXO
+ * 
+ * ---- [COMANDO] ----
+ * 
+ * NÃO ALTERE NADA ABAIXO
+*/
+function fancyReply(message) {
+    (colorCommandMessages.mentionUser) ? 
+    sendMessage((colorCommandMessages.commandEmoji.length > 0) ? `${colorCommandMessages.commandEmoji} **|** ${author().getAsMention()} ${message}` : `${author().getAsMention()} ${message}`)
+    :
+    sendMessage((colorCommandMessages.commandEmoji.length > 0) ? `${colorCommandMessages.commandEmoji} **|** ${message}` : `${message}`);
+}
+
+var guild = getGuild(); // Pega a guild/servidor em que o comando foi executado
+var getRole = (colorCommand.roleId.length >= 18) ? guild.getRoleById(colorCommand.roleId) : 0; // Pega a role pelo ID (você pode ver o ID da role usando "roleid @role" na Loritta)
+
+if (getRole !== 0 && !author().hasRole(getRole)) {
+    fancyReply(colorCommandMessages.missingPermission);
+    return;
+}
+
+var colorSelection = joinArguments().toLowerCase();
+
+function showColors() {
+    var colorsName = '';
+    var role; 
+    cores.forEach(a => {
+        role = guild.getRoleById(a.roleId);
+        colorsName += `${(colorCommandMessages.alreadyUsedIndicator) ? (author().hasRole(role)) ? '🔵 ' : '🔴 ' : ''}${a.cor}, `;
+    });
+    
+    colorsName = colorsName.replace(/,\s*$/, "");
+    
+    return colorsName;
+}
+
+if (colorSelection === 'list' || colorSelection.length === 0) {
+    fancyReply(`Cores disponíves: \n\`${showColors()}\`.`);
+} else {
+    var idx = cores.findIndex(a => a.cor === colorSelection);
+    var selectedRole;
+    
+    if (idx === -1) { 
+        fancyReply(`**${colorSelection}** não é uma cor válida! Lista de cores: \n\`${showColors()}\`.`);
+        return;
+    } else {
+        selectedRole = guild.getRoleById(cores[idx].roleId);   
+    }
+    
+    (author().hasRole(selectedRole)) ? (author().removeRole(selectedRole), fancyReply(colorCommandMessages.cargoRemovido)) : (author().addRole(selectedRole), fancyReply(colorCommandMessages.cargoAdicionado));
+}
+
