@@ -1,15 +1,15 @@
 // ---- [Configurações] ----
 var colorCommand = {
-    roleId: "" // Id da role que poderá usar o comando de cor, deixe em branco caso qualquer um possa usar
+    roleId: "364201981016801281" // Id da role que poderá usar o comando de cor, deixe em branco caso qualquer um possa usar
 };
 
 var colorCommandMessages =  {
-    missingPermission: "Sem permissão", // Mensagem que será enviada quando o usuário não tiver a role para usar o comando (deixar em branco caso não exista role específica para usar o comando)   
+    missingPermission: "Este comando é apenas para doadores, se você quer me ajudar a comprar um 🍮, então vire um doador! https://loritta.website/donate", // Mensagem que será enviada quando o usuário não tiver a role para usar o comando (deixar em branco caso não exista role específica para usar o comando)   
     mentionUser: true, // Mencionar o usuário que executou o comando, deixe "false" para NÃO mencionar e "true" para mencionar
     alreadyUsedIndicator: true, // Adiciona um 🔵 ou 🔴 na frente de todas as cores quando o usuário executa o comando com um "list" na frente. Serve para indicar se o usuário está ou não usando aquela cor.   
     commandEmoji: "🎨", // Emoji que vem antes do comando ("😄 | ..."). O emoji precisa estar em unicode, ex: "commandEmoji: "😔".
-    cargoAdicionado: "Cor adicionada", // Mensagem enviada quando o cargo da cor é ADICIONADO ao usuário
-    cargoRemovido: "Cor removida" // Mensagem enviada quando o cargo da cor é REMOVIDO do usuário
+    cargoAdicionado: "Cor adicionada!", // Mensagem enviada quando o cargo da cor é ADICIONADO ao usuário
+    cargoRemovido: "Cor removida!" // Mensagem enviada quando o cargo da cor é REMOVIDO do usuário
 };
 
 var cores = []; // Array das cores, não mexa nisso
@@ -21,11 +21,17 @@ function addColor(colorName, role) { // Função para adicionar as cores, també
     });
 }
 
-//Para adicionar uma cor, use: "addColor('NOMEDACOR', 'IDDOCARGO');" 
-//Ex: 
-//addColor('Vermelho', '123456789101112131');
-//addColor('Verde', '123456789101112131');
-//...
+addcolor("dourado", "373539973984550912");
+addcolor("azul claro", "373539846620315648");
+addcolor("azul escuro", "373539894259351553");
+addcolor("amarelo", "373539918863007745");
+addcolor("vermelho", "373540030053875713");
+addcolor("vermelho escuro", "373540076095012874");
+addcolor("verde claro", "374613592185634816");
+addcolor("verde escuro", "374613624536170500");
+addcolor("rosa claro", "374613958608551936");
+addcolor("rosa escuro", "374614002707333120");
+addcolor("rosa choque", "411235044842012674");
 
 /**
  * NÃO ALTERE NADA ABAIXO
