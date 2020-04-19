@@ -3,7 +3,7 @@
   <p align="center">Incriveis comandos personalizados para colocar no seu servidor!</p>
   <hr></hr>
 </p>
-*[Ban (+b)](https://github.com/kaikecarlos/Loritta-Commands/blob/master/Ban/B.js)* No momento não está funcionando
+*[Ban (+b)](https://github.com/kaikecarlos/Loritta-Commands/blob/master/Ban/B.js)* No momento não está funcionando*
 *[Giverole (+giverole)](https://github.com/kaikecarlos/Loritta-Commands/blob/master/GiveRole/GiveRole.js)* Comando básico de dar cargo
 *[Neonify (+neonify)](https://github.com/kaikecarlos/Loritta-Commands/blob/master/Neonify/neonify.js)* Transforma o texto em forma de "neon"
 <img src="https://media.discordapp.net/attachments/398987569485971466/582710004793081867/unknown-1.png">
