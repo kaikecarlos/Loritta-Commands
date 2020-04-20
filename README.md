@@ -4,6 +4,7 @@
   <hr></hr>
 </p>
 - [Giverole (+giverole)](https://github.com/kaikecarlos/Loritta-Commands/blob/master/GiveRole/GiveRole.js) Comando básico de dar cargo
+
 - [Neonify (+neonify)](https://github.com/kaikecarlos/Loritta-Commands/blob/master/Neonify/neonify.js) Transforma o texto em forma de "neon"
 
 <img src="https://media.discordapp.net/attachments/398987569485971466/582710004793081867/unknown-1.png">
