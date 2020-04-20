@@ -3,6 +3,7 @@
   <p align="center">Incriveis comandos personalizados para colocar no seu servidor!</p>
   <hr></hr>
 </p>
+
 - [Giverole (+giverole)](https://github.com/kaikecarlos/Loritta-Commands/blob/master/GiveRole/GiveRole.js) Comando básico de dar cargo
 
 - [Neonify (+neonify)](https://github.com/kaikecarlos/Loritta-Commands/blob/master/Neonify/neonify.js) Transforma o texto em forma de "neon"
